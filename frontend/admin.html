@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Spin Wheel Options</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Add some specific admin panel layout overrides from style.css */
+    body {
+      overflow: auto; /* Enable scrolling for admin page */
+      display: block;
+      padding: 20px;
+    }
+    .admin-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(22, 33, 62, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: left;
+    }
+    th {
+      background: rgba(233, 69, 96, 0.8);
+    }
+    .btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 30px auto;
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      font-size: 1.2rem;
+      border-radius: 100px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn:hover {
+      background: #f15f79;
+    }
+    .log-container {
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .log-container table {
+      margin-bottom: 0px;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <h1>Admin Panel</h1>
+    
+    <h2>Remaining Daily Limits</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Prize</th>
+          <th>Remaining Amount</th>
+        </tr>
+      </thead>
+      <tbody id="limits-table-body">
+        <!-- Filled by JS -->
+      </tbody>
+    </table>
+    
+    <div style="display: flex; gap: 10px; margin: 0 auto 30px auto; width: fit-content;">
+      <button class="btn" style="margin: 0;" id="reset-btn">Reset Daily Limits</button>
+      <button class="btn" style="margin: 0; background: #cc0000;" id="delete-btn">Delete All Records</button>
+    </div>
+
+    <h2>Winning Logs</h2>
+    <div class="log-container" id="logs-container">
+      <!-- Filled by JS with grouped tables -->
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
