@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const resetBtn = document.getElementById('reset-btn');
   const deleteBtn = document.getElementById('delete-btn');
 
-  // Format the name elegantly
+
   const formatPrizeName = (key) => {
     switch (key) {
       case 'tshirt': return 'T-Shirt';
