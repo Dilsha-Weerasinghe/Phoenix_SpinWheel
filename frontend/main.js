@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentRotation = 0;
     let isSpinning = false;
-    
+
     // Express server will serve static files, so API is on same host.
     const API_BASE = '/api';
 
@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const res = await fetch(`${API_BASE}/get-status`);
             const data = await res.json();
-            
+
             if (data.success) {
                 const { remainingPrizes } = data.data;
-                
+
                 if (remainingPrizes > 0) {
                     if (!isSpinning) {
                         statusText.innerText = '';
@@ -67,20 +67,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
 
                 const prizeImages = {
-                    'tshirt': 'https://i.postimg.cc/Hk11zsJh/imgi-240-standard-plain-round-neck-shirt-white-3f96896d-60d3-4b52-b0d2-dfc42cf1462b-large.png',
+                    'tshirt': 'https://i.postimg.cc/8k2Z0TWX/OFFER_1_removebg_preview.png',
                     'cap': 'https://i.postimg.cc/ZRjv4MNR/Untitled-design-removebg-preview-(3).png',
                     'shoe_rack': 'https://i.postimg.cc/nhW7ggJ0/Whats-App-Image-2026-04-07-at-4-44-07-PM-removebg-preview.png'
                 };
 
                 const spins = 8; // spin fast
                 const degreesPerSegment = 60;
-                
+
                 const targetMod = (360 - (segmentIndex * degreesPerSegment)) % 360;
                 const currentMod = currentRotation % 360;
-                
+
                 let diff = targetMod - currentMod;
                 if (diff < 0) diff += 360;
-                
+
                 const randomOffset = (Math.random() * 40) - 20;
 
                 const additionalRotation = (spins * 360) + diff + randomOffset;
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     checkStatus();
                     isSpinning = false;
                 }, 5200);
-                
+
             } else {
                 statusText.innerText = 'Error occurred during spin. Try again.';
                 isSpinning = false;
