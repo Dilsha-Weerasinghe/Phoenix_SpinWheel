@@ -1,5 +1,4 @@
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -9,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-
+const path = require('path');
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // MongoDB connection
@@ -24,6 +23,7 @@ app.use('/api', apiRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.get('/admin', (req, res) => {
+  const path = require('path');
   res.sendFile(path.join(__dirname, '../frontend/admin.html'));
 });
 

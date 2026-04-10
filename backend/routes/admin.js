@@ -19,7 +19,7 @@ async function getOrCreateTodayRecord() {
       date: dateStr,
       prizes: {
         tshirt: 10,
-        cap: 10,
+        cap: 25,
         shoe_rack: 10
       },
       firstSpinTime: new Date()
@@ -90,7 +90,7 @@ router.post('/reset', async (req, res) => {
     
     // Explicitly update values to ensure Mongoose detects the change
     record.prizes.tshirt = 10;
-    record.prizes.cap = 10;
+    record.prizes.cap = 25;
     record.prizes.shoe_rack = 10;
     
     // CRITICAL: Reset the firstSpinTime so the probability pacing algorithm 

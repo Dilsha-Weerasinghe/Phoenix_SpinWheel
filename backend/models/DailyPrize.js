@@ -8,7 +8,7 @@ const dailyPrizeSchema = new mongoose.Schema({
   },
   prizes: {
     tshirt: { type: Number, default: 10 },
-    cap: { type: Number, default: 10 },
+    cap: { type: Number, default: 25 },
     shoe_rack: { type: Number, default: 10 }
   },
   totalSpins: {

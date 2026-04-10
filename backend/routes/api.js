@@ -20,7 +20,7 @@ async function getOrCreateTodayRecord() {
       date: dateStr,
       prizes: {
         tshirt: 10,
-        cap: 10,
+        cap: 25,
         shoe_rack: 10
       },
       firstSpinTime: new Date()
