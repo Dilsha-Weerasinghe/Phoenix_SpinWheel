@@ -64,6 +64,206 @@
     .log-container table {
       margin-bottom: 0px;
     }
+    /* Timing Control */
+    .timing-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 30px;
+    }
+    .timing-card h2 {
+      margin-bottom: 14px;
+      font-size: 1.1rem;
+      color: #FFD700;
+      letter-spacing: 0.03em;
+      text-align: left;
+    }
+    .timing-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .timing-row label {
+      color: #ccc;
+      font-size: 0.95rem;
+      min-width: 140px;
+    }
+    .timing-row span {
+      color: #fff;
+      font-weight: 600;
+    }
+    .duration-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .duration-control button {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: #e94560;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      font-family: inherit;
+      line-height: 1;
+    }
+    .duration-control button:hover { background: #f15f79; }
+    .duration-display {
+      background: #0f1123;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #FFD700;
+      min-width: 70px;
+      text-align: center;
+    }
+    .btn-sm {
+      background: #e94560;
+      color: white;
+      border: none;
+      padding: 7px 18px;
+      font-size: 0.9rem;
+      border-radius: 100px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-sm:hover { background: #f15f79; }
+    .btn-sm.danger { background: #cc0000; }
+    .btn-sm.danger:hover { background: #e50000; }
+
+    /* Win Probability Gauge */
+    .prob-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 30px;
+    }
+    .prob-card h2 {
+      font-size: 1.1rem;
+      color: #FFD700;
+      letter-spacing: 0.03em;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .prob-gauge-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .prob-bar-wrap {
+      flex: 1;
+      background: rgba(255,255,255,0.08);
+      border-radius: 100px;
+      height: 18px;
+      overflow: hidden;
+    }
+    .prob-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      width: 1%;
+      background: linear-gradient(90deg, #00e676, #FFD700, #e94560);
+      transition: width 0.8s ease, background 0.5s ease;
+    }
+    .prob-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      min-width: 70px;
+      text-align: right;
+    }
+    .prob-note {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    /* Manual Probability Override */
+    .manual-prob-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,165,0,0.35);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 30px;
+    }
+    .manual-prob-card h2 {
+      font-size: 1.1rem;
+      color: #FFA500;
+      letter-spacing: 0.03em;
+      margin-bottom: 16px;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mode-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .mode-badge.auto   { background: #00e676; color: #000; }
+    .mode-badge.manual { background: #FFA500; color: #000; }
+    .prob-slider-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .prob-slider {
+      flex: 1;
+      min-width: 160px;
+      accent-color: #FFA500;
+      cursor: pointer;
+      height: 6px;
+    }
+    .prob-number-input {
+      width: 72px;
+      background: #0f1123;
+      border: 1px solid rgba(255,165,0,0.4);
+      border-radius: 8px;
+      color: #FFA500;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 6px 4px;
+      font-family: inherit;
+    }
+    .prob-number-input:focus { outline: none; border-color: #FFA500; }
+    .prob-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-orange {
+      background: #FFA500;
+      color: #000;
+      border: none;
+      padding: 7px 20px;
+      font-size: 0.9rem;
+      border-radius: 100px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: inherit;
+    }
+    .btn-orange:hover { background: #ffb732; }
+    .btn-clear-prob {
+      background: transparent;
+      color: #888;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 7px 18px;
+      font-size: 0.9rem;
+      border-radius: 100px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-clear-prob:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
   </style>
 </head>
 <body>
@@ -84,8 +284,68 @@
     </table>
     
     <div style="display: flex; gap: 10px; margin: 0 auto 30px auto; width: fit-content;">
-      <button class="btn" style="margin: 0;" id="reset-btn">Reset Daily Limits</button>
+      <button class="btn" style="margin: 0; background: #00e676; color: #000; font-weight: bold;" id="update-prizes-btn">Update Prize Numbers</button>
+      <button class="btn" style="margin: 0;" id="reset-btn">Reset Defaults</button>
       <button class="btn" style="margin: 0; background: #cc0000;" id="delete-btn">Delete All Records</button>
+    </div>
+
+    <!-- Timing Control -->
+    <div class="timing-card">
+      <h2>⏱ Timing Control</h2>
+
+      <div class="timing-row">
+        <label>Distribution Window:</label>
+        <div class="duration-control">
+          <button id="dur-dec">−</button>
+          <div class="duration-display" id="dur-display">6h</div>
+          <button id="dur-inc">+</button>
+        </div>
+        <button class="btn-sm" id="dur-save">Save Duration</button>
+      </div>
+
+      <div class="timing-row">
+        <label>Clock Started:</label>
+        <span id="first-spin-display">—</span>
+      </div>
+
+      <div class="timing-row">
+        <label>Elapsed:</label>
+        <span id="elapsed-display">—</span>
+      </div>
+
+      <div class="timing-row">
+        <button class="btn-sm danger" id="restart-clock-btn">Restart Pacing Clock</button>
+        <span style="color:#888; font-size:0.82rem;">Resets the clock to now — prizes will be paced from this moment.</span>
+      </div>
+    </div>
+
+    <!-- Win Probability Gauge -->
+    <div class="prob-card">
+      <h2>🎯 Current Win Probability</h2>
+      <div class="prob-gauge-row">
+        <div class="prob-bar-wrap">
+          <div class="prob-bar-fill" id="prob-bar"></div>
+        </div>
+        <div class="prob-value" id="prob-value">—</div>
+      </div>
+      <div class="prob-note">Live probability for the next spin. Starts very low and rises over the distribution window. Refreshes every 30s.</div>
+    </div>
+
+    <!-- Manual Probability Override -->
+    <div class="manual-prob-card">
+      <h2>🎛 Manual Probability Override <span class="mode-badge auto" id="prob-mode-badge">AUTO</span></h2>
+      <div class="prob-slider-row">
+        <input type="range" class="prob-slider" id="manual-prob-slider" min="0" max="100" step="1" value="5">
+        <input type="number" class="prob-number-input" id="manual-prob-input" min="0" max="100" step="1" value="5">
+        <span style="color:#FFA500; font-weight:700; font-size:1rem;">%</span>
+      </div>
+      <div class="prob-actions">
+        <button class="btn-orange" id="prob-apply-btn">Apply Override</button>
+        <button class="btn-clear-prob" id="prob-clear-btn">✕ Clear — Restore Auto</button>
+      </div>
+      <div class="prob-note" style="margin-top:12px;">
+        When active, this overrides the algorithm and forces every spin to use exactly this probability. Set to <strong style="color:#fff">0%</strong> to make winning impossible, or <strong style="color:#fff">100%</strong> to guarantee a win. Click <em>Clear</em> to return to the automatic time-based algorithm.
+      </div>
     </div>
 
     <h2>Winning Logs</h2>

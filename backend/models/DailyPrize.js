@@ -18,6 +18,14 @@ const dailyPrizeSchema = new mongoose.Schema({
   firstSpinTime: {
     type: Date,
     required: true
+  },
+  durationHours: {
+    type: Number,
+    default: 6
+  },
+  manualProbability: {
+    type: Number,   // null = use auto algorithm; 0–1 = admin override
+    default: null
   }
 });
 

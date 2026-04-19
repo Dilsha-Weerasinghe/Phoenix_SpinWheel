@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const DailyPrize = require('../models/DailyPrize');
 const WinLog = require('../models/WinLog');
+const { getCurrentWinProbability } = require('../utils/probability');
 
 // Helper to get today's date string YYYY-MM-DD
 function getTodayDateString() {
@@ -70,10 +71,18 @@ router.get('/stats', async (req, res) => {
     // Convert object to array and reverse it to show newest days first
     const logsGroupedByDay = Object.values(groupedObj).sort((a,b) => b.dayNumber - a.dayNumber);
 
+    const winProbability = getCurrentWinProbability(record);
+
     res.json({
       success: true,
       data: {
         prizes: record.prizes,
+        timing: {
+          durationHours: record.durationHours || 6,
+          firstSpinTime: record.firstSpinTime
+        },
+        winProbability,
+        manualProbability: record.manualProbability ?? null,
         logs: logsGroupedByDay
       }
     });
@@ -121,6 +130,110 @@ router.delete('/records', async (req, res) => {
     res.json({
       success: true,
       message: "All records and daily limits have been fully completely wiped. System is back to ground zero!"
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+});
+
+// PATCH /api/admin/timing
+router.patch('/timing', async (req, res) => {
+  try {
+    const { durationHours, restartClock } = req.body;
+    const record = await getOrCreateTodayRecord();
+
+    if (durationHours !== undefined) {
+      const parsed = parseFloat(durationHours);
+      if (isNaN(parsed) || parsed <= 0 || parsed > 24) {
+        return res.status(400).json({ success: false, error: 'durationHours must be a number between 0 and 24.' });
+      }
+      record.durationHours = parsed;
+    }
+
+    if (restartClock === true) {
+      record.firstSpinTime = new Date();
+    }
+
+    await record.save();
+
+    res.json({
+      success: true,
+      message: 'Timing updated successfully.',
+      data: {
+        durationHours: record.durationHours,
+        firstSpinTime: record.firstSpinTime
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+});
+
+// PATCH /api/admin/probability
+// Body: { value: 0–100 } to set override, or { value: null } to clear it
+router.patch('/probability', async (req, res) => {
+  try {
+    const { value } = req.body;
+    const record = await getOrCreateTodayRecord();
+
+    if (value === null || value === undefined) {
+      // Clear override — revert to auto algorithm
+      record.manualProbability = null;
+      record.markModified('manualProbability');
+    } else {
+      const parsed = parseFloat(value);
+      if (isNaN(parsed) || parsed < 0 || parsed > 100) {
+        return res.status(400).json({ success: false, error: 'value must be a number between 0 and 100 (percent).' });
+      }
+      record.manualProbability = parsed / 100;
+      record.markModified('manualProbability');
+    }
+
+    await record.save();
+
+    res.json({
+      success: true,
+      message: value === null ? 'Probability override cleared — auto algorithm restored.' : `Manual probability set to ${value}%.`,
+      data: { manualProbability: record.manualProbability }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: 'Server error' });
+  }
+});
+
+// PATCH /api/admin/prizes
+// Body: { tshirt?: number, cap?: number, shoe_rack?: number }
+router.patch('/prizes', async (req, res) => {
+  try {
+    const { tshirt, cap, shoe_rack } = req.body;
+    const record = await getOrCreateTodayRecord();
+
+    if (tshirt !== undefined) {
+      const parsed = parseInt(tshirt, 10);
+      if (isNaN(parsed) || parsed < 0) return res.status(400).json({ success: false, error: 'Invalid tshirt count' });
+      record.prizes.tshirt = parsed;
+    }
+    if (cap !== undefined) {
+      const parsed = parseInt(cap, 10);
+      if (isNaN(parsed) || parsed < 0) return res.status(400).json({ success: false, error: 'Invalid cap count' });
+      record.prizes.cap = parsed;
+    }
+    if (shoe_rack !== undefined) {
+      const parsed = parseInt(shoe_rack, 10);
+      if (isNaN(parsed) || parsed < 0) return res.status(400).json({ success: false, error: 'Invalid shoe_rack count' });
+      record.prizes.shoe_rack = parsed;
+    }
+
+    record.markModified('prizes');
+    await record.save();
+
+    res.json({
+      success: true,
+      message: 'Prize stock updated successfully.',
+      data: record.prizes
     });
   } catch (error) {
     console.error(error);
